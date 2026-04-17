@@ -25,22 +25,27 @@ const allowedOrigins = [
 ];
 
  
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       if (!origin) return callback(null, true);  
+//       if (allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error('CORS not allowed'));
+//       }
+//     },
+//     credentials: true,
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//     allowedHeaders: ['Content-Type', 'Authorization', 'token', 'atoken'],
+//   })
+// );
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);  
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('CORS not allowed'));
-      }
-    },
+    origin: true, // 🔥 সব origin allow
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'token', 'atoken'],
   })
 );
-
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('dev'));
