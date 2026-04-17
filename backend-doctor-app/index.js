@@ -1,9 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
-import multer from 'multer';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import helmet from 'helmet';
 
 import { dbConnect } from './config/dbConfig.js';
 import adminRouter from './routes/adminRoutes.js';
@@ -15,7 +15,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
+app.use(helmet());
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:5174',
@@ -42,7 +42,7 @@ const allowedOrigins = [
 // );
 app.use(
   cors({
-    origin: true, // 🔥 সব origin allow
+    origin: true,  
     credentials: true,
   })
 );
